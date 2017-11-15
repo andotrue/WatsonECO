@@ -1,0 +1,114 @@
+API種別			Natural Language Classifier
+インスタンス名称		Natural Language Classifier-01
+URL				https://gateway.watson-j.jp/natural-language-classifier/api
+ユーザーID		69e3294b-e434-4d39-bdc9-bf675be11237
+password		K3i4hT6hevdc
+
+-F : POST
+-F @ファイル名 : POST（ファイル送信）
+
+
+■学習（POST）
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" -F training_data=@sampledata1.csv -F training_metadata="{\"language\":\"ja\",\"name\":\"Natural Language Classifier-01\"}" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers"
+↓↓↓
+{
+  "classifier_id" : "12d107x35-nlc-1545",
+  "name" : "Natural Language Classifier-01",
+  "language" : "ja",
+  "created" : "2017-02-27T08:56:01.112Z",
+  "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545",
+  "status" : "Training",
+  "status_description" : "The classifier instance is in its training phase, not yet ready to accept classify requests"
+}
+
+■ステータス１（GET）
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers"
+↓↓↓
+{
+  "classifiers" : [ {
+    "classifier_id" : "12d107x35-nlc-1063",
+    "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1063",
+    "name" : "テスト2",
+    "language" : "ja",
+    "created" : "2017-02-16T10:47:30.124Z"
+  }, {
+    "classifier_id" : "12d107x35-nlc-1062",
+    "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1062",
+    "name" : "テスト",
+    "language" : "ja",
+    "created" : "2017-02-16T10:42:11.096Z"
+  }, {
+    "classifier_id" : "12d107x35-nlc-1083",
+    "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1083",
+    "name" : "コピーテスト",
+    "language" : "ja",
+    "created" : "2017-02-17T09:58:53.679Z"
+  }, {
+    "classifier_id" : "12d107x35-nlc-1545",
+    "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545",
+    "name" : "Natural Language Classifier-01",
+    "language" : "ja",
+    "created" : "2017-02-27T08:56:01.112Z"
+  } ]
+}
+
+
+■ステータス２（GET）
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545"
+↓↓↓
+{
+  "classifier_id" : "12d107x35-nlc-1545",
+  "name" : "Natural Language Classifier-01",
+  "language" : "ja",
+  "created" : "2017-02-27T08:56:01.112Z",
+  "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545",
+  "status" : "Training",
+  "status_description" : "The classifier instance is in its training phase, not yet ready to accept classify requests"
+}
+
+■分類（GET）
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545/classify?text=diet"
+↓↓↓
+{
+  "classifier_id" : "12d107x35-nlc-1545",
+  "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545",
+  "text" : "diet",
+  "top_class" : "糖質制限ダイエット",
+  "classes" : [ {
+    "class_name" : "糖質制限ダイエット",
+    "confidence" : 0.6036670086558903
+  }, {
+    "class_name" : "食事制限ダイエット",
+    "confidence" : 0.2575194518554054
+  }, {
+    "class_name" : "雑穀米ダイエット",
+    "confidence" : 0.13881353948870423
+  } ]
+}
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545/classify?text=%e3%83%80%e3%82%a4%e3%82%a8%e3%83%83%e3%83%88"
+↓↓↓
+{
+  "classifier_id" : "12d107x35-nlc-1545",
+  "url" : "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545",
+  "text" : "ダイエット",
+  "top_class" : "糖質制限ダイエット",
+  "classes" : [ {
+    "class_name" : "糖質制限ダイエット",
+    "confidence" : 0.9825592586449798
+  }, {
+    "class_name" : "雑穀米ダイエット",
+    "confidence" : 0.013118896792289381
+  }, {
+    "class_name" : "食事制限ダイエット",
+    "confidence" : 0.004321844562730793
+  } ]
+}
+
+
+■分類（POST）
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" -d "{\"text\":\"diet\"}" "https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545/classify" 
+curl -u "69e3294b-e434-4d39-bdc9-bf675be11237":"K3i4hT6hevdc" -X POST --header 'Content-Type: application/json' --header 'Accept: text/html' -d '{ \"text\": \"diet\" }' 'https://gateway.watson-j.jp/natural-language-classifier/api/v1/classifiers/12d107x35-nlc-1545/classify'
+
+
+
+
