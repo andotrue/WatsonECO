@@ -115,7 +115,7 @@ $(function(){
 
                     //質問リスト		        
   		            if(selectlists != ''){
-  		            	appned_li = appned_li + "<div>例えばこんな質問。。。</div>";
+  		            	appned_li = appned_li + "<br><div>例えばこんな質問。。。</div>";
                     	appned_li = appned_li + "<div>";
     				    for(var i=0, len=selectlists.length; i<len; i++){
     				    	console.dir(selectlists[i]);
@@ -179,14 +179,20 @@ function selclick(selword){
     </div>
     <div class="panel-body">
       <div class="media">
+
+<div class="row">
+  <div class="col-xs-1 col-s-1 col-md-1">
         <div class="media-left">
           <a href="#" class="icon-rounded">Rb</a>
         </div>
+  </div>
+  <div class="col-xs-11 col-s-11 col-md-11">
         <div class="media-body">
           <h4 class="media-heading"></h4>
           <div><?php echo $output_message; ?></div>
           <div>なにかご質問はございますか？</div>
           <?php if(isset($selectlists)){ ?>
+              <br>
               <div>例えばこんな質問。。。</div>
               <div>
                 <?php foreach($selectlists as $selectlist){ ?>
@@ -195,6 +201,10 @@ function selclick(selword){
     		  </div>
 		  <?php } ?>
         </div>
+  </div>
+</div>
+
+
       </div>
     </div>
   </section>
