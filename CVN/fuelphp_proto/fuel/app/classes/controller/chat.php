@@ -4,10 +4,29 @@ use Fuel\Core\DB;
 
 class Controller_Chat extends Controller {
     
-    private $user_id = "b0d9def7-035c-40fa-bec6-b56408ed4fe1";//Credentials-1
-    private $password = "AloZ5oWM2sad";
-    private $version = "2017-02-03";
+    /*
+     *IBM Cloud Lite @andou@parco-city.co.jp
+     *REGION:US South, CLOUD FOUNDRY組織:SOFTBANK-ECO-00932, CLOUD FOUNDRY スペース：Space1
+     *Conversation-8i
+     *キー名:Credentials-1, 作成日:2017年2月17日 - 07:53:00
+     */ 
+    //private $user_id = "b0d9def7-035c-40fa-bec6-b56408ed4fe1";//Credentials-1
+    //private $password = "AloZ5oWM2sad";
+    //private $version = "2017-02-03";
+    //private $workspaceID = "5cfe92e7-ff44-49eb-8944-b85e621c4f62";//ando study pdm
     
+    /*
+     *IBM Cloud Lite @andou@parco-digital.co.jp
+     *REGION:US South, CLOUD FOUNDRY組織:andou@parco-digital.co.jp, CLOUD FOUNDRY スペース：dev
+     *Conversation-5p
+     *キー名:conversation_tooling_key1511143864109, 作成日:2017年11月20日 - 11:11:05
+     */ 
+    private $user_id = "21b7379c-ff9c-4644-8cba-fc250a517fe8";//Credentials-1
+    private $password = "RRdTxSxmXN5T";
+    private $version = "2017-02-03";
+    private $workspaceID = "872c401e-2e56-42cd-929b-0b25bfd3efc1";//ando study pdm
+    
+
     private $selapis = array(
             'aws' => 'all workspace',
             'ows' => 'one workspace',
@@ -25,7 +44,7 @@ class Controller_Chat extends Controller {
             $this->workspace_id = "4a2fa0d8-128f-413f-ad6c-bcfbd90f5587";//SB BOT 演習正解用1 [SB BOT_演習正解用.json]
         }
         elseif($method_param0 == "3"){
-            $this->workspace_id = "5cfe92e7-ff44-49eb-8944-b85e621c4f62";//ando study pdm
+            $this->workspace_id = $this->workspaceID;
         }
     }
     /***********************************

@@ -79,5 +79,10 @@ html, body {
 
 .sellistBt {
 	margin: 2px;
-	display: inline; 
+	display: inline;
+}
+a.sellistBt {
+	margin: 2px;
+	display: block;
+	//display: inline-block;
 }
