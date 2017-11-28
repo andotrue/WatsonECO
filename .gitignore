@@ -1,7 +1,3 @@
-/CVN/fuelphp_proto/composer.phar
-
-
-
 # temp files from editors
 *~
 *.bak
@@ -35,3 +31,10 @@ desktop.ini
 /fuel/app/logs/*/*/*
 /fuel/app/cache/*/*
 /fuel/app/config/crypt.php
+
+
+
+/CVN/fuelphp_proto/composer.phar
+/CVN/fuelphp_proto/fuel/app/logs/.gitkeep
+
+
