@@ -4,28 +4,28 @@ use Fuel\Core\DB;
 
 class Controller_Chat extends Controller {
     
-    /*
+    /********************
      *IBM Cloud Lite @andou@parco-city.co.jp
      *REGION:US South, CLOUD FOUNDRY組織:SOFTBANK-ECO-00932, CLOUD FOUNDRY スペース：Space1
      *Conversation-8i
      *キー名:Credentials-1, 作成日:2017年2月17日 - 07:53:00
-     */ 
-    //private $user_id = "b0d9def7-035c-40fa-bec6-b56408ed4fe1";//Credentials-1
-    //private $password = "AloZ5oWM2sad";
-    //private $version = "2017-02-03";
-    //private $workspaceID = "5cfe92e7-ff44-49eb-8944-b85e621c4f62";//ando study pdm
-    
+     ********************/ 
     /*
+    private $user_id = "b0d9def7-035c-40fa-bec6-b56408ed4fe1";//Credentials-1
+    private $password = "AloZ5oWM2sad";
+    private $version = "2017-02-03";
+    private $workspaceID = "5cfe92e7-ff44-49eb-8944-b85e621c4f62";//ando study pdm
+    */
+    /*******************
      *IBM Cloud Lite @andou@parco-digital.co.jp
      *REGION:US South, CLOUD FOUNDRY組織:andou@parco-digital.co.jp, CLOUD FOUNDRY スペース：dev
      *Conversation-5p
      *キー名:conversation_tooling_key1511143864109, 作成日:2017年11月20日 - 11:11:05
-     */ 
+     ********************/
     private $user_id = "21b7379c-ff9c-4644-8cba-fc250a517fe8";//Credentials-1
     private $password = "RRdTxSxmXN5T";
     private $version = "2017-02-03";
     private $workspaceID = "872c401e-2e56-42cd-929b-0b25bfd3efc1";//ando study pdm
-    
 
     private $selapis = array(
             'aws' => 'all workspace',
@@ -117,9 +117,11 @@ class Controller_Chat extends Controller {
             echo "None Output";
         }
         $output_messages = $this->messageConvert($output_message);
-        $data['output_message'] = $output_messages["text"];
+        //$data['output_message'] = $output_messages["text"];
+        //$data['output_message'] = nl2br($output_messages["text"]);
+        $data['output_message'] = str_replace("\n","",$output_messages["text"]);
         $data['selectlists'] = $output_messages["selectlists"];
-        //Debug::dump($data);
+        //Debug::dump($data);exit;
         
         //self::pusherIo($output_message);
         
@@ -139,6 +141,7 @@ class Controller_Chat extends Controller {
             );
             $data['js'] = array(
                     'jquery-3.2.0.min.js',
+                    'jquery.bubble.text.js',
             );
             return Response::forge(View::forge('chat/index2',$data));
         }

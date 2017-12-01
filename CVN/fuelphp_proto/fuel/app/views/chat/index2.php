@@ -102,6 +102,10 @@ $(function(){
 				    var date = new Date(jQuery.now()).toLocaleString();
 
 				    //レスポンス
+				    var max = 100000;
+				    var min = 1;
+				    var random = Math.floor( Math.random() * (max+1-min) ) + min;
+				    bcname = "bubble"+random;
 					var appned_li = 
             					"<hr>"+
             			        "<div class='media'>"+
@@ -110,7 +114,8 @@ $(function(){
                 			        "</div>"+
                 			        "<div class='media-body'>"+
 	 	              			        "<h4 class='media-heading'>Date:"+date+"</h4>"+
-                			        "<div>"+$resMsg+"</div>"
+                			        //"<div>"+$resMsg+"</div>"
+                			        "<div id='"+bcname+"'></div>"
                 			        ;
 
                     //質問リスト		        
@@ -129,12 +134,15 @@ $(function(){
 			        $("div.panel-body").append(appned_li);
 			        $(':hidden[name="context"]').val(result['context']);
 
+					bubble(bcname, $resMsg);
+			        
 					var h = $('#reqMsg').offset().top;
 					$('#reqMsg').focus();
 					//alert(h);
 					h = h + 999;
 					//alert(h);
 					$('html,body').animate({ scrollTop: h }, 'slow');
+
 			    }
 			    else if(result['status'] == 'error'){
 				    $('#result_ok').text('');
@@ -168,7 +176,35 @@ function selclick(selword){
 	//alert($(':text[name="message"]').val());
 	$('#msg_post').submit();
 }
+
+$(document).ready(function() {
+    var $element = $('#bubble');
+    var newText = "<?php echo $output_message; ?>なにかご質問はございますか？";
+
+    bubbleText({
+        element: $element,
+        newText: newText,
+        speed: 3000,
+        //repeat: Infinity,
+    });
+
+});
+
+function bubble($e, $nt){
+    var $element = $('#'+$e);
+    var newText = $nt;
+
+    bubbleText({
+        element: $element,
+        newText: newText,
+        speed: 3000,
+        //repeat: Infinity,
+    });
+}
+
 </script>
+
+
 
 <div class="page">
   <section class="panel panel-default">
@@ -189,8 +225,11 @@ function selclick(selword){
   <div class="col-xs-11 col-s-11 col-md-11">
         <div class="media-body">
           <h4 class="media-heading"></h4>
+          <!-- 
           <div><?php echo $output_message; ?></div>
-          <div>なにかご質問はございますか？</div>
+          <div>なにかご質問はございますか？</div> 
+          -->
+          <div id="bubble"></div>
           <?php if(isset($selectlists)){ ?>
               <br>
               <div>例えばこんな質問。。。</div>
