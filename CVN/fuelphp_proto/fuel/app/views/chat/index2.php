@@ -194,10 +194,15 @@ function bubble($e, $nt){
     var $element = $('#'+$e);
     var newText = $nt;
 
+    //alert($nt.length);
+    var speed=500;
+    if($nt.length>200) speed=100;
+
     bubbleText({
         element: $element,
         newText: newText,
-        speed: 3000,
+        speed: speed,
+        //letterSpeed: 10,
         //repeat: Infinity,
     });
 }
